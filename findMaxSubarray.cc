@@ -9,10 +9,11 @@
 */
 #include<iostream>
 #include<algorithm>
+#include<limits.h>
 
 int findMidMax(int A[],int p,int q,int r)
 {
-    int sumLeft = 0,maxLeft = 0;
+    int sumLeft = 0,maxLeft = INT_MIN;
     for(int i = q;i >= p;--i)
     {
         sumLeft += A[i];
@@ -20,7 +21,7 @@ int findMidMax(int A[],int p,int q,int r)
             maxLeft = sumLeft;
     }
 
-    int sumRight = 0,maxRight = 0;
+    int sumRight = 0,maxRight = INT_MIN;
     for(int j = q+1;j <= r;++j)
     {
         sumRight += A[j];
@@ -56,7 +57,7 @@ int findMaxSubarray1(int A[],int p,int r)
 */
 int findMaxSubarray2(int A[],int length)
 {
-    int maxSum = 0;
+    int maxSum = INT_MIN;
     int currentSum = 0;
     for(int i = 0;i < length;++i)
     {
@@ -71,8 +72,8 @@ int findMaxSubarray2(int A[],int length)
 
 int main()
 {
-    int A[] = {1,-2,3,10,-4,7,2,-5};
+    int A[] = {13,-3,-25,20,-3,-16,-23,18,20,-7,12,-5,-22,15,-4,7}; //最大子数组为18,20，-7,12
     std::cout << findMaxSubarray1(A,0,sizeof(A) / sizeof(*A)-1) << std::endl;
-    std::cout << findMaxSubarray1(A,0,sizeof(A) / sizeof(*A)) << std::endl;
+    std::cout << findMaxSubarray2(A,sizeof(A) / sizeof(*A)) << std::endl;
     return 0;
 }
