@@ -52,7 +52,6 @@ void bucketSort(int* A,int len)
         int bucketNumber = static_cast<int>((A[i]-min+1) / preBucketSize);
         listNode* item = new listNode(A[i]);
         insertToBucket(item,buckets,bucketNumber);
-        delete item;
     }
     
     int index = 0;
@@ -63,8 +62,11 @@ void bucketSort(int* A,int len)
             listNode* p = buckets[i].pNext;
             while(p)
             {
+                listNode* temp = p;
                 A[index++] = p->value;
                 p = p->pNext;
+                delete temp;
+                
             }
         }
     }
@@ -74,19 +76,18 @@ void bucketSort(int* A,int len)
 
 int main()
 {
+    int len = 100;
     srand((unsigned)time(NULL));  
-    int* A = new int[100000000];
-    for(int i = 0;i < 100000000;++i)
+    int* A = new int[len];
+    for(int i = 0;i < len;++i)
     {
-        A[i] =  (rand() % (100000000-1))+1;
+        A[i] =  (rand() % (10000-1))+1;
     }
-    std::cout << "ok\n";
 
-    bucketSort(A,100000000);
-    for(int i = 0;i < sizeof(A)/sizeof(A[0]);++i)
+    bucketSort(A,len);
+    for(int i = 0;i < len;++i)
         std::cout << A[i] << " ";
     std::cout << std::endl;
-    std::cout << "ok\n";
 
     return 0;
 }
