@@ -54,7 +54,7 @@ unsigned int hashFunction2(std::string str)
 
 
 /*
-开放寻址中的探查方法：均匀散列要求有m!个探查序列
+开放寻址法中的探查方法：均匀散列要求有m!个探查序列
 */
 
 //线性探查：只能得到m种不同的探查序列，存在一次群集问题，
@@ -111,6 +111,12 @@ std::vector<unsigned int> doubleHashing(std::string key,unsigned int i)
     return T;
 }
 
+/*
+完全散列
+采用两级的散列方案，在每一级都采用全域散列
+比如第一级的散列函数为h(K)，将关键字散列到散列表的槽i,
+在第二级散列函数中，存储了所有散列到槽i中的关键字，且第二级的散列表si的大小为ni^2，二级散列函数hi(k)保证在第二级散列表中不冲突
+*/
 
 int main()
 {
