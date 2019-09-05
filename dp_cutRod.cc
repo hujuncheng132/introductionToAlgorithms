@@ -95,16 +95,16 @@ std::tuple<int*,int*> extendedBottomUpCutRod(int* P,int n)
     S[0] = 0;
     for(int j = 1;j <= n;++j)
     {
-        int q = INT32_MIN;
+        R[j] = INT32_MIN;
         for(int i = 1;i <= j;++i)
         {
-            if(q < P[i]+R[j-i])
+            int q = P[i]+R[j-i];
+            if(R[j] < q)
             {
-                q = P[i]+R[j-i];
+                R[j] = q;
                 S[j] = i; //S[j] = i表示切割的第一段钢条的长度为i
             }
         }
-        R[j] = q;
     }
 
     return std::make_tuple(R,S);
@@ -124,6 +124,9 @@ void printCutRodSolution(int* P,int n)
         n = n-S[n];
     }
     std::cout << std::endl;
+
+    delete[] R;
+    delete[] S;
 }
 
 int main()
